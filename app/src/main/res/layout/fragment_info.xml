@@ -29,7 +29,8 @@
             android:textSize="22sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="HardcodedText" />
 
         <TextView
             android:id="@+id/info_text2"
@@ -38,13 +39,15 @@
             android:layout_marginStart="32dp"
             android:layout_marginEnd="32dp"
             android:fontFamily="sans-serif-light"
-            android:text="Данная программа разработана специально для учета замера проб почвы. Следуйте строго указаниям программы шаг за шагом.  Замер производиться раз в неделю. Для завершения текущего замера и сохранения всех данных необходимо нажать на кнопку «СОХРАНИТ ЗАМЕР» после завершения всех этапов текущего замера.  "
+            android:gravity="center"
+            android:text="Эта программа разработана специально для учета проб грунта.\n\nСтрого следуйте инструкциям программы шаг за шагом.\n\nОтбор проб производится один раз в неделю.\n\nНайдите место для взятия пробы по указанной метке и нажмите на кнопку &quot;НАЧАТЬ&quot; чтобы создать новую запись."
             android:textColor="#00897B"
             android:textSize="22sp"
             app:layout_constraintBottom_toTopOf="@+id/guideline2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/info_text1" />
+            app:layout_constraintTop_toBottomOf="@+id/info_text1"
+            tools:ignore="HardcodedText" />
 
         <Button
             android:id="@+id/info_start"
@@ -54,12 +57,13 @@
             android:backgroundTint="@color/teal_700"
             android:elevation="4dp"
             android:text="НАЧАТЬ"
-            android:textAlignment="center"
+            android:gravity = "center"
             android:textColor="@color/white"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/guideline2" />
+            app:layout_constraintTop_toTopOf="@+id/guideline2"
+            tools:ignore="HardcodedText" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>
