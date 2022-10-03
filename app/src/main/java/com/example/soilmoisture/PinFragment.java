@@ -20,18 +20,18 @@ public class PinFragment extends Fragment implements View.OnTouchListener{
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-    private final String check_pin = "2323";
 
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
     private String pin = "";
-    SharedPreferences pref;
+    private String check_pin;
+    private SharedPreferences pref;
 
-    private Button[] btn = new Button[9];
+    private Button[] btn = new Button[10];
     private Button btn_unfocus;
     private TextView pin_text;
-    private int[] btn_id = {R.id.btn1, R.id.btn2, R.id.btn3, R.id.btn4, R.id.btn5, R.id.info_start, R.id.btn7, R.id.btn8, R.id.btn9};
+    private int[] btn_id = {R.id.btn1, R.id.btn2, R.id.btn3, R.id.btn4, R.id.btn5, R.id.btn6, R.id.btn7, R.id.btn8, R.id.btn9, R.id.btn0};
 
     public PinFragment() {
         // Required empty public constructor
@@ -62,6 +62,7 @@ public class PinFragment extends Fragment implements View.OnTouchListener{
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_pin, container, false);
         pref = view.getContext().getSharedPreferences("root_data", 0);
+        check_pin = pref.getString("pin", "");
 
         for(int i = 0; i < btn.length; i++){
             btn[i] = (Button) view.findViewById(btn_id[i]);
@@ -113,7 +114,7 @@ public class PinFragment extends Fragment implements View.OnTouchListener{
                     enterPin("5");
                     break;
 
-                case R.id.info_start:
+                case R.id.btn6:
                     setFocus(btn_unfocus, btn[5]);
                     enterPin("6");
                     break;
@@ -131,6 +132,11 @@ public class PinFragment extends Fragment implements View.OnTouchListener{
                 case R.id.btn9:
                     setFocus(btn_unfocus, btn[8]);
                     enterPin("9");
+                    break;
+
+                case R.id.btn0:
+                    setFocus(btn_unfocus, btn[9]);
+                    enterPin("0");
                     break;
             }
         }if (event.getAction() == MotionEvent.ACTION_UP) {

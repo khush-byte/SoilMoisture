@@ -14,4 +14,24 @@
         android:name="com.example.soilmoisture.InfoFragment"
         android:label="fragment_info"
         tools:layout="@layout/fragment_info" />
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.example.soilmoisture.MainFragment"
+        android:label="fragment_main"
+        tools:layout="@layout/fragment_main" />
+    <fragment
+        android:id="@+id/plotInfoFragment"
+        android:name="com.example.soilmoisture.PlotInfoFragment"
+        android:label="fragment_plot_info"
+        tools:layout="@layout/fragment_plot_info" />
+    <fragment
+        android:id="@+id/plotFragment"
+        android:name="com.example.soilmoisture.PlotFragment"
+        android:label="fragment_plot"
+        tools:layout="@layout/fragment_plot" />
+    <fragment
+        android:id="@+id/sampleFragment"
+        android:name="com.example.soilmoisture.SampleFragment"
+        android:label="fragment_sample"
+        tools:layout="@layout/fragment_sample" />
 </navigation>

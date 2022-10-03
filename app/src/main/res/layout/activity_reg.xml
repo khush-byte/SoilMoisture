@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".RegActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/reg_box"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/text_field1"
+            android:layout_width="0dp"
+            android:layout_height="64dp"
+            android:layout_marginStart="3dp"
+            android:layout_marginEnd="3dp"
+            android:gravity="bottom"
+            android:textColorHint="#5D6565"
+            app:hintTextColor="#5195A1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <EditText
+                android:id="@+id/user_qr"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@drawable/edit_text_bg"
+                android:drawableStart="@drawable/ic_baseline_qr_code"
+                android:drawableLeft="@drawable/ic_baseline_qr_code"
+                android:drawablePadding="11dp"
+                android:hint="Введите QR код"
+                android:importantForAutofill="no"
+                android:inputType="numberPassword"
+                android:maxLength="5"
+                android:paddingStart="12dp"
+                android:paddingLeft="12dp"
+                android:paddingEnd="12dp"
+                android:paddingRight="12dp"
+                android:textColor="#6A6767"
+                tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/text_field2"
+            android:layout_width="0dp"
+            android:layout_height="64dp"
+            android:layout_marginStart="3dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginEnd="3dp"
+            android:gravity="bottom"
+            android:textColorHint="#5D6565"
+            app:hintTextColor="#5195A1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_field1"
+            app:passwordToggleEnabled="true">
+
+            <EditText
+                android:id="@+id/user_pinCode1"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@drawable/edit_text_bg"
+                android:digits="123456789"
+                android:drawableStart="@drawable/ic_baseline_lock"
+                android:drawableLeft="@drawable/ic_baseline_lock"
+                android:drawablePadding="12dp"
+                android:hint="@string/pinCode"
+                android:importantForAutofill="no"
+                android:inputType="numberPassword"
+                android:maxLength="4"
+                android:paddingStart="11dp"
+                android:paddingLeft="11dp"
+                android:paddingEnd="0dp"
+                android:paddingRight="0dp"
+                android:textColor="#6A6767"
+                tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/user_pin_text_title"
+            android:layout_width="0dp"
+            android:layout_height="64dp"
+            android:layout_marginStart="3dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginEnd="3dp"
+            android:gravity="bottom"
+            android:textColorHint="#5D6565"
+            app:hintTextColor="#5195A1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_field2"
+            app:passwordToggleEnabled="true">
+
+            <EditText
+                android:id="@+id/user_pinCode2"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@drawable/edit_text_bg"
+                android:digits="123456789"
+                android:drawableStart="@drawable/ic_baseline_check_box"
+                android:drawableLeft="@drawable/ic_baseline_check_box"
+                android:drawablePadding="12dp"
+                android:hint="@string/pinCode2"
+                android:importantForAutofill="no"
+                android:inputType="numberPassword"
+                android:maxLength="4"
+                android:paddingStart="11dp"
+                android:paddingLeft="11dp"
+                android:paddingEnd="0dp"
+                android:paddingRight="0dp"
+                android:textColor="#6A6767"
+                tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/reg_btn"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:layout_marginTop="32dp"
+            android:backgroundTint="@color/teal_700"
+            android:elevation="4dp"
+            android:gravity="center"
+            android:paddingLeft="36dp"
+            android:paddingRight="36dp"
+            android:text="ЗАРЕГИСТРИРОВАТЬСЯ"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/user_pin_text_title"
+            tools:ignore="HardcodedText" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

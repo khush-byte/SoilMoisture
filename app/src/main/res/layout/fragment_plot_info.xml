@@ -4,12 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    tools:context=".PinFragment" >
+    tools:context=".PlotInfoFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/white">
 
         <TextView
             android:id="@+id/info_text1"
@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="50dp"
             android:fontFamily="sans-serif-light"
-            android:text="ШАГ ПЕРВЫЙ"
+            android:text="ШАГ ТРЕТИЙ"
             android:textColor="#00897B"
             android:textSize="22sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -25,22 +25,36 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="HardcodedText" />
 
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="0dp"
+            android:layout_height="300dp"
+            android:layout_marginStart="6dp"
+            android:layout_marginEnd="6dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/image1"
+            app:layout_constraintBottom_toTopOf="@+id/info_text2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/info_text1" />
+
         <TextView
             android:id="@+id/info_text2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginEnd="32dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginBottom="24dp"
             android:fontFamily="sans-serif-light"
             android:gravity="center"
-            android:text="Эта программа разработана специально для учета проб грунта.\n\nСтрого следуйте инструкциям программы шаг за шагом.\n\nОтбор проб производится один раз в неделю.\n\nНайдите место для взятия пробы и нажмите на кнопку &quot;НАЧАТЬ&quot; для создания записи."
+            android:text="Возмите пробы грунта как показано на картинке.\n\nНажмите на кнопку &quot;ПРОДОЛЖИТЬ&quot; чтобы перейти к следующему шагу."
             android:textColor="#00897B"
             android:textSize="22sp"
-            app:layout_constraintBottom_toTopOf="@+id/guideline2"
+            app:layout_constraintBottom_toTopOf="@+id/info_next"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/info_text1"
+            app:layout_constraintTop_toBottomOf="@+id/imageView3"
             tools:ignore="HardcodedText" />
 
         <androidx.constraintlayout.widget.Guideline
@@ -48,10 +62,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.86" />
+            app:layout_constraintGuide_percent="0.86"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <Button
-            android:id="@+id/info_start"
+            android:id="@+id/info_next"
             style="@style/Widget.AppCompat.Button.Colored"
             android:layout_width="wrap_content"
             android:layout_height="60dp"
@@ -60,7 +75,7 @@
             android:gravity="center"
             android:paddingLeft="36dp"
             android:paddingRight="36dp"
-            android:text="НАЧАТЬ"
+            android:text="ПРОДОЛЖИТЬ"
             android:textColor="@color/white"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"

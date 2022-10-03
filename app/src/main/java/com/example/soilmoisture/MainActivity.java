@@ -42,12 +42,16 @@ import javax.net.ssl.SSLEngine;
 public class MainActivity extends AppCompatActivity {
     TextView data_field;
     Activity activity;
-    public static int plot_number = 0;
-    public static boolean isPump = false;
+    public static int first_plot_index = -1;
+    public static int second_plot_index = -1;
+    public static int third_plot_index = -1;
+    public static int first_sample_index = -1;
+    public static int second_sample_index = -1;
+    public static int third_sample_index = -1;
+    public static int first_depth_index = -1;
+    public static int second_depth_index = -1;
+    public static int third_depth_index = -1;
     public static String date;
-    public static int minutes = 0;
-    public static int water_level = 0;
-    public static boolean isSend = false;
     private String select_date;
 
     @SuppressLint({"SourceLockedOrientationActivity", "SetTextI18n"})
@@ -78,14 +82,16 @@ public class MainActivity extends AppCompatActivity {
         Runnable refresh = new Runnable() {
             @Override
             public void run() {
-                if (!NetworkManager.isNetworkAvailable(getApplicationContext())) {
+                /*if (!NetworkManager.isNetworkAvailable(getApplicationContext())) {
                     Intent myIntent = new Intent(getApplicationContext(), CheckActivity.class);
                     startActivity(myIntent);
                     activity.finish();
                 } else {
                     setTime();
                     handler.postDelayed(this, 1000);
-                }
+                }*/
+                setTime();
+                handler.postDelayed(this, 1000);
             }
         };
         handler.postDelayed(refresh, 1000);
@@ -298,35 +304,35 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        /*NavController navController = Navigation.findNavController(activity, R.id.nav_host_main);
+        NavController navController = Navigation.findNavController(activity, R.id.nav_host_main);
         String fname = Objects.requireNonNull(Objects.requireNonNull(navController.getCurrentDestination()).getLabel()).toString();
-        Log.i("MSG2", fname);*/
+        Log.i("MSG2", fname);
 
-        /*switch (fname) {
-            case "fragment_auth":
+        switch (fname) {
+            case "fragment_pin":
                 activity.finish();
-                break;
-            case "fragment_main":
-                activity.finish();
-                break;
-            case "fragment_second":
-                navController.navigate(R.id.mainFragment);
-                break;
-            case "fragment_third":
-                navController.navigate(R.id.mainFragment);
                 break;
             case "fragment_info":
+                navController.navigate(R.id.pinFragment);
+                break;
+            case "fragment_main":
+                navController.navigate(R.id.pinFragment);
+                break;
+            case "fragment_first_plot":
                 navController.navigate(R.id.mainFragment);
                 break;
-            case "fragment_fourth":
-                navController.navigate(R.id.secondFragment);
-                break;
-            case "fragment_first":
+            case "fragment_plot_info":
                 navController.navigate(R.id.mainFragment);
+                break;
+            case "fragment_plot":
+                navController.navigate(R.id.plotInfoFragment);
+                break;
+            case "fragment_sample":
+                navController.navigate(R.id.plotFragment);
                 break;
             default:
                 navController.navigate(R.id.mainFragment);
                 break;
-        }*/
+        }
     }
 }
