@@ -25,7 +25,7 @@
             app:layout_constraintTop_toBottomOf="@+id/info_text" />
 
         <TextView
-            android:id="@+id/info_text"
+            android:id="@+id/sample_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
@@ -50,7 +50,7 @@
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/info_text"
+            app:layout_constraintTop_toBottomOf="@+id/sample_text"
             tools:ignore="HardcodedText" />
 
         <TextView

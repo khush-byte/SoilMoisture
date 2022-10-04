@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:fontFamily="sans-serif-thin"
-            android:text="НЕДЕЛЯ №1"
+            android:text="НЕДЕЛЯ №"
             android:textColor="#00897B"
             android:textSize="20sp"
             android:textStyle="bold"

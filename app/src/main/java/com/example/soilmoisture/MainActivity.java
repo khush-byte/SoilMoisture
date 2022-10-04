@@ -20,6 +20,7 @@ import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.security.ProviderInstaller;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -45,14 +46,64 @@ public class MainActivity extends AppCompatActivity {
     public static int first_plot_index = -1;
     public static int second_plot_index = -1;
     public static int third_plot_index = -1;
-    public static int first_sample_index = -1;
-    public static int second_sample_index = -1;
-    public static int third_sample_index = -1;
-    public static int first_depth_index = -1;
-    public static int second_depth_index = -1;
-    public static int third_depth_index = -1;
+    //------
+    public static int first_sample_plot1_index = -1;
+    public static int second_sample_plot1_index = -1;
+    public static int third_sample_plot1_index = -1;
+
+    public static int first_sample_plot2_index = -1;
+    public static int second_sample_plot2_index = -1;
+    public static int third_sample_plot2_index = -1;
+
+    public static int first_sample_plot3_index = -1;
+    public static int second_sample_plot3_index = -1;
+    public static int third_sample_plot3_index = -1;
+    //------
+    public static int first_depth_plot1_sample1_index = -1;
+    public static int second_depth_plot1_sample1_index = -1;
+    public static int third_depth_plot1_sample1_index = -1;
+
+    public static int first_depth_plot1_sample2_index = -1;
+    public static int second_depth_plot1_sample2_index = -1;
+    public static int third_depth_plot1_sample2_index = -1;
+
+    public static int first_depth_plot1_sample3_index = -1;
+    public static int second_depth_plot1_sample3_index = -1;
+    public static int third_depth_plot1_sample3_index = -1;
+
+    public static int first_depth_plot2_sample1_index = -1;
+    public static int second_depth_plot2_sample1_index = -1;
+    public static int third_depth_plot2_sample1_index = -1;
+
+    public static int first_depth_plot2_sample2_index = -1;
+    public static int second_depth_plot2_sample2_index = -1;
+    public static int third_depth_plot2_sample2_index = -1;
+
+    public static int first_depth_plot2_sample3_index = -1;
+    public static int second_depth_plot2_sample3_index = -1;
+    public static int third_depth_plot2_sample3_index = -1;
+
+    public static int first_depth_plot3_sample1_index = -1;
+    public static int second_depth_plot3_sample1_index = -1;
+    public static int third_depth_plot3_sample1_index = -1;
+
+    public static int first_depth_plot3_sample2_index = -1;
+    public static int second_depth_plot3_sample2_index = -1;
+    public static int third_depth_plot3_sample2_index = -1;
+
+    public static int first_depth_plot3_sample3_index = -1;
+    public static int second_depth_plot3_sample3_index = -1;
+    public static int third_depth_plot3_sample3_index = -1;
+    //------
+    private String week_number = "1";
+    public static int main_yes_number = 0;
+    public static int plot_yes_number = 0;
+    public static int plot1_yes_number = 0;
+    public static int plot2_yes_number = 0;
+    public static int plot3_yes_number = 0;
+
     public static String date;
-    private String select_date;
+    private SharedPreferences.Editor editor;
 
     @SuppressLint({"SourceLockedOrientationActivity", "SetTextI18n"})
     @Override
@@ -95,6 +146,12 @@ public class MainActivity extends AppCompatActivity {
             }
         };
         handler.postDelayed(refresh, 1000);
+
+        getJson();
+
+        editor = activity.getApplicationContext().getSharedPreferences("root_data", 0).edit();
+        editor.putString("week_number", week_number);
+        editor.apply();
     }
 
     @SuppressLint("SetTextI18n")
@@ -105,7 +162,7 @@ public class MainActivity extends AppCompatActivity {
         SimpleDateFormat df3 = new SimpleDateFormat("dd.MM.yyyy", Locale.getDefault());
         String day = df2.format(c);
         date = df1.format(c);
-        select_date = df3.format(c);
+        String select_date = df3.format(c);
         day = day.substring(0, 1).toUpperCase() + day.substring(1);
         data_field.setText(day + ", " + date);
     }
@@ -323,7 +380,22 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case "fragment_plot_info":
                 navController.navigate(R.id.mainFragment);
-                break;
+                if(main_yes_number == 1 && plot1_yes_number == 0) first_plot_index = -1;
+                else if(main_yes_number == 2 && plot2_yes_number == 0) second_plot_index = -1;
+                else if(main_yes_number == 3 && plot3_yes_number == 0) third_plot_index = -1;
+
+                if(first_sample_plot1_index==1 && second_sample_plot1_index==1 && third_sample_plot1_index==1){
+                    first_plot_index = 1;
+                }
+
+                if(first_sample_plot2_index==1 && second_sample_plot2_index==1 && third_sample_plot2_index==1){
+                    second_plot_index = 1;
+                }
+
+                if(first_sample_plot3_index==1 && second_sample_plot3_index==1 && third_sample_plot3_index==1){
+                    third_plot_index = 1;
+                }
+                    break;
             case "fragment_plot":
                 navController.navigate(R.id.plotInfoFragment);
                 break;
@@ -333,6 +405,138 @@ public class MainActivity extends AppCompatActivity {
             default:
                 navController.navigate(R.id.mainFragment);
                 break;
+        }
+    }
+
+    protected void onStop () {
+        super.onStop();
+        editor.putString("json_data", setJson());
+        editor.apply();
+    }
+
+    private String setJson(){
+        String json_st = "";
+
+        try {
+            JSONObject json = new JSONObject();
+            json.put("first_plot_index", first_plot_index);
+            json.put("second_plot_index", second_plot_index);
+            json.put("third_plot_index", third_plot_index);
+
+            json.put("first_sample_plot1_index", first_sample_plot1_index);
+            json.put("second_sample_plot1_index", second_sample_plot1_index);
+            json.put("third_sample_plot1_index", third_sample_plot1_index);
+            json.put("first_sample_plot2_index", first_sample_plot2_index);
+            json.put("second_sample_plot2_index", second_sample_plot2_index);
+            json.put("third_sample_plot2_index", third_sample_plot2_index);
+            json.put("first_sample_plot3_index", first_sample_plot3_index);
+            json.put("second_sample_plot3_index", second_sample_plot3_index);
+            json.put("third_sample_plot3_index", third_sample_plot3_index);
+
+            json.put("first_depth_plot1_sample1_index", first_depth_plot1_sample1_index);
+            json.put("second_depth_plot1_sample1_index", second_depth_plot1_sample1_index);
+            json.put("third_depth_plot1_sample1_index", third_depth_plot1_sample1_index);
+            json.put("first_depth_plot1_sample2_index", first_depth_plot1_sample2_index);
+            json.put("second_depth_plot1_sample2_index", second_depth_plot1_sample2_index);
+            json.put("third_depth_plot1_sample2_index", third_depth_plot1_sample2_index);
+            json.put("first_depth_plot1_sample3_index", first_depth_plot1_sample3_index);
+            json.put("second_depth_plot1_sample3_index", second_depth_plot1_sample3_index);
+            json.put("third_depth_plot1_sample3_index", third_depth_plot1_sample3_index);
+
+            json.put("first_depth_plot2_sample1_index", first_depth_plot2_sample1_index);
+            json.put("second_depth_plot2_sample1_index", second_depth_plot2_sample1_index);
+            json.put("third_depth_plot2_sample1_index", third_depth_plot2_sample1_index);
+            json.put("first_depth_plot2_sample2_index", first_depth_plot2_sample2_index);
+            json.put("second_depth_plot2_sample2_index", second_depth_plot2_sample2_index);
+            json.put("third_depth_plot2_sample2_index", third_depth_plot2_sample2_index);
+            json.put("first_depth_plot2_sample3_index", first_depth_plot2_sample3_index);
+            json.put("second_depth_plot2_sample3_index", second_depth_plot2_sample3_index);
+            json.put("third_depth_plot2_sample3_index", third_depth_plot2_sample3_index);
+
+            json.put("first_depth_plot3_sample1_index", first_depth_plot3_sample1_index);
+            json.put("second_depth_plot3_sample1_index", second_depth_plot3_sample1_index);
+            json.put("third_depth_plot3_sample1_index", third_depth_plot3_sample1_index);
+            json.put("first_depth_plot3_sample2_index", first_depth_plot3_sample2_index);
+            json.put("second_depth_plot3_sample2_index", second_depth_plot3_sample2_index);
+            json.put("third_depth_plot3_sample2_index", third_depth_plot3_sample2_index);
+            json.put("first_depth_plot3_sample3_index", first_depth_plot3_sample3_index);
+            json.put("second_depth_plot3_sample3_index", second_depth_plot3_sample3_index);
+            json.put("third_depth_plot3_sample3_index", third_depth_plot3_sample3_index);
+
+            json.put("main_yes_number", main_yes_number);
+            json.put("plot_yes_number", plot_yes_number);
+            json.put("plot1_yes_number", plot1_yes_number);
+            json.put("plot2_yes_number", plot2_yes_number);
+            json.put("plot3_yes_number", plot3_yes_number);
+
+            json_st = json.toString();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return json_st;
+    }
+
+    private void getJson(){
+        SharedPreferences pref = activity.getApplicationContext().getSharedPreferences("root_data", 0);
+        String my_json = pref.getString("json_data", "");
+
+        if(!my_json.equals("")) {
+            try {
+                JSONObject jsonObject = new JSONObject(my_json);
+                first_plot_index = jsonObject.getInt("first_plot_index");
+                second_plot_index = jsonObject.getInt("second_plot_index");
+                third_plot_index = jsonObject.getInt("third_plot_index");
+
+                first_sample_plot1_index = jsonObject.getInt("first_sample_plot1_index");
+                second_sample_plot1_index = jsonObject.getInt("second_sample_plot1_index");
+                third_sample_plot1_index = jsonObject.getInt("third_sample_plot1_index");
+                first_sample_plot2_index = jsonObject.getInt("first_sample_plot2_index");
+                second_sample_plot2_index = jsonObject.getInt("second_sample_plot2_index");
+                third_sample_plot2_index = jsonObject.getInt("third_sample_plot2_index");
+                first_sample_plot3_index = jsonObject.getInt("first_sample_plot3_index");
+                second_sample_plot3_index = jsonObject.getInt("second_sample_plot3_index");
+                third_sample_plot3_index = jsonObject.getInt("third_sample_plot3_index");
+
+                first_depth_plot1_sample1_index = jsonObject.getInt("first_depth_plot1_sample1_index");
+                second_depth_plot1_sample1_index = jsonObject.getInt("second_depth_plot1_sample1_index");
+                third_depth_plot1_sample1_index = jsonObject.getInt("third_depth_plot1_sample1_index");
+                first_depth_plot1_sample2_index = jsonObject.getInt("first_depth_plot1_sample2_index");
+                second_depth_plot1_sample2_index = jsonObject.getInt("second_depth_plot1_sample2_index");
+                third_depth_plot1_sample2_index = jsonObject.getInt("third_depth_plot1_sample2_index");
+                first_depth_plot1_sample3_index = jsonObject.getInt("first_depth_plot1_sample3_index");
+                second_depth_plot1_sample3_index = jsonObject.getInt("second_depth_plot1_sample3_index");
+                third_depth_plot1_sample3_index = jsonObject.getInt("third_depth_plot1_sample3_index");
+
+                first_depth_plot2_sample1_index = jsonObject.getInt("first_depth_plot2_sample1_index");
+                second_depth_plot2_sample1_index = jsonObject.getInt("second_depth_plot2_sample1_index");
+                third_depth_plot2_sample1_index = jsonObject.getInt("third_depth_plot2_sample1_index");
+                first_depth_plot2_sample2_index = jsonObject.getInt("first_depth_plot2_sample2_index");
+                second_depth_plot2_sample2_index = jsonObject.getInt("second_depth_plot2_sample2_index");
+                third_depth_plot2_sample2_index = jsonObject.getInt("third_depth_plot2_sample2_index");
+                first_depth_plot2_sample3_index = jsonObject.getInt("first_depth_plot2_sample3_index");
+                second_depth_plot2_sample3_index = jsonObject.getInt("second_depth_plot2_sample3_index");
+                third_depth_plot2_sample3_index = jsonObject.getInt("third_depth_plot2_sample3_index");
+
+                first_depth_plot3_sample1_index = jsonObject.getInt("first_depth_plot3_sample1_index");
+                second_depth_plot3_sample1_index = jsonObject.getInt("second_depth_plot3_sample1_index");
+                third_depth_plot3_sample1_index = jsonObject.getInt("third_depth_plot3_sample1_index");
+                first_depth_plot3_sample2_index = jsonObject.getInt("first_depth_plot3_sample2_index");
+                second_depth_plot3_sample2_index = jsonObject.getInt("second_depth_plot3_sample2_index");
+                third_depth_plot3_sample2_index = jsonObject.getInt("third_depth_plot3_sample2_index");
+                first_depth_plot3_sample3_index = jsonObject.getInt("first_depth_plot3_sample3_index");
+                second_depth_plot3_sample3_index = jsonObject.getInt("second_depth_plot3_sample3_index");
+                third_depth_plot3_sample3_index = jsonObject.getInt("third_depth_plot3_sample3_index");
+
+                main_yes_number = jsonObject.getInt("main_yes_number");
+                plot_yes_number = jsonObject.getInt("plot_yes_number");
+                plot1_yes_number = jsonObject.getInt("plot1_yes_number");
+                plot2_yes_number = jsonObject.getInt("plot2_yes_number");
+                plot3_yes_number = jsonObject.getInt("plot3_yes_number");
+
+            } catch (JSONException err) {
+                Log.d("Error", err.toString());
+            }
         }
     }
 }

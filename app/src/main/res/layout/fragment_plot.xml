@@ -25,12 +25,12 @@
             app:layout_constraintTop_toBottomOf="@+id/info_text" />
 
         <TextView
-            android:id="@+id/info_text"
+            android:id="@+id/plot_number"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:fontFamily="sans-serif-thin"
-            android:text="УЧАСТОК №1"
+            android:text="УЧАСТОК №"
             android:textColor="#00897B"
             android:textSize="20sp"
             android:textStyle="bold"
@@ -50,7 +50,7 @@
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/info_text"
+            app:layout_constraintTop_toBottomOf="@+id/plot_number"
             tools:ignore="HardcodedText" />
 
         <TextView
@@ -113,7 +113,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/info_text9">
 
                 <RadioButton
-                    android:id="@+id/main_yes1"
+                    android:id="@+id/plot_yes1"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="1dp"
@@ -175,7 +175,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/info_text8">
 
                 <RadioButton
-                    android:id="@+id/main_yes2"
+                    android:id="@+id/plot_yes2"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="1dp"
@@ -237,7 +237,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/info_text7">
 
                 <RadioButton
-                    android:id="@+id/main_yes3"
+                    android:id="@+id/plot_yes3"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="1dp"

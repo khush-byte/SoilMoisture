@@ -3,17 +3,23 @@ package com.example.soilmoisture;
 import static com.example.soilmoisture.MainActivity.first_plot_index;
 import static com.example.soilmoisture.MainActivity.second_plot_index;
 import static com.example.soilmoisture.MainActivity.third_plot_index;
+import static com.example.soilmoisture.MainActivity.main_yes_number;
+
 import android.annotation.SuppressLint;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavOptions;
 import androidx.navigation.fragment.NavHostFragment;
+
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -62,7 +68,7 @@ public class MainFragment extends Fragment {
         }
     }
 
-    @SuppressLint("UseCompatLoadingForColorStateLists")
+    @SuppressLint({"UseCompatLoadingForColorStateLists", "SetTextI18n"})
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -72,6 +78,10 @@ public class MainFragment extends Fragment {
         RadioGroup main_tr1 = view.findViewById(R.id.main_tr1);
         RadioGroup main_tr2 = view.findViewById(R.id.main_tr2);
         RadioGroup main_tr3 = view.findViewById(R.id.main_tr3);
+        TextView info_text = view.findViewById(R.id.info_text);
+        RadioButton main_yes1 = view.findViewById(R.id.main_yes1);
+        RadioButton main_yes2 = view.findViewById(R.id.main_yes2);
+        RadioButton main_yes3 = view.findViewById(R.id.main_yes3);
 
         if(first_plot_index==0) ((RadioButton)main_tr1.getChildAt(0)).setChecked(true);
         if(first_plot_index==1) ((RadioButton)main_tr1.getChildAt(1)).setChecked(true);
@@ -88,18 +98,16 @@ public class MainFragment extends Fragment {
             submit.setBackgroundTintList(requireContext().getResources().getColorStateList(R.color.grey));
         }
 
+        SharedPreferences pref = view.getContext().getSharedPreferences("root_data", 0);
+        String week_number = pref.getString("week_number", "");
+        info_text.setText("НЕДЕЛЯ №"+week_number);
+
         main_tr1.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
         {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 int index = main_tr1.indexOfChild(view.findViewById(main_tr1.getCheckedRadioButtonId()));
                 first_plot_index = index;
-                if(index==0) {
-                    NavOptions.Builder navBuilder =  new NavOptions.Builder();
-                    NavHostFragment.findNavController(MainFragment.this)
-                            .navigate(R.id.plotInfoFragment, null, navBuilder.build());
-                }
-
                 if(first_plot_index!=-1 && second_plot_index!=-1 && third_plot_index!=-1) {
                     submit.setEnabled(true);
                     submit.setBackgroundTintList(requireContext().getResources().getColorStateList(R.color.teal_700));
@@ -113,12 +121,6 @@ public class MainFragment extends Fragment {
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 int index = main_tr2.indexOfChild(view.findViewById(main_tr2.getCheckedRadioButtonId()));
                 second_plot_index = index;
-                if(index==0) {
-                    NavOptions.Builder navBuilder =  new NavOptions.Builder();
-                    NavHostFragment.findNavController(MainFragment.this)
-                            .navigate(R.id.plotInfoFragment, null, navBuilder.build());
-                }
-
                 if(first_plot_index!=-1 && second_plot_index!=-1 && third_plot_index!=-1) {
                     submit.setEnabled(true);
                     submit.setBackgroundTintList(requireContext().getResources().getColorStateList(R.color.teal_700));
@@ -132,12 +134,6 @@ public class MainFragment extends Fragment {
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 int index = main_tr3.indexOfChild(view.findViewById(main_tr3.getCheckedRadioButtonId()));
                 third_plot_index = index;
-                if(index==0) {
-                    NavOptions.Builder navBuilder =  new NavOptions.Builder();
-                    NavHostFragment.findNavController(MainFragment.this)
-                            .navigate(R.id.plotInfoFragment, null, navBuilder.build());
-                }
-
                 if(first_plot_index!=-1 && second_plot_index!=-1 && third_plot_index!=-1) {
                     submit.setEnabled(true);
                     submit.setBackgroundTintList(requireContext().getResources().getColorStateList(R.color.teal_700));
@@ -145,6 +141,22 @@ public class MainFragment extends Fragment {
             }
         });
 
+        openPage(main_yes1, 1);
+        openPage(main_yes2, 2);
+        openPage(main_yes3, 3);
+
         return view;
+    }
+
+    private void openPage(RadioButton btn, int number){
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NavOptions.Builder navBuilder =  new NavOptions.Builder();
+                NavHostFragment.findNavController(MainFragment.this)
+                        .navigate(R.id.plotInfoFragment, null, navBuilder.build());
+                main_yes_number = number;
+            }
+        });
     }
 }
