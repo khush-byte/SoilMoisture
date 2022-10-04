@@ -1,7 +1,10 @@
 package com.example.soilmoisture;
 
+import static com.example.soilmoisture.MainActivity.first_plot_index;
 import static com.example.soilmoisture.MainActivity.first_sample_index;
+import static com.example.soilmoisture.MainActivity.second_plot_index;
 import static com.example.soilmoisture.MainActivity.second_sample_index;
+import static com.example.soilmoisture.MainActivity.third_plot_index;
 import static com.example.soilmoisture.MainActivity.third_sample_index;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
@@ -100,6 +103,11 @@ public class PlotFragment extends Fragment {
                     NavHostFragment.findNavController(PlotFragment.this)
                             .navigate(R.id.sampleFragment, null, navBuilder.build());
                 }
+
+                if(first_sample_index!=-1 && second_sample_index!=-1 && third_sample_index!=-1) {
+                    plot_next.setEnabled(true);
+                    plot_next.setBackgroundTintList(requireContext().getResources().getColorStateList(R.color.teal_700));
+                }
             }
         });
 
@@ -113,6 +121,11 @@ public class PlotFragment extends Fragment {
                     NavOptions.Builder navBuilder =  new NavOptions.Builder();
                     NavHostFragment.findNavController(PlotFragment.this)
                             .navigate(R.id.sampleFragment, null, navBuilder.build());
+                }
+
+                if(first_sample_index!=-1 && second_sample_index!=-1 && third_sample_index!=-1) {
+                    plot_next.setEnabled(true);
+                    plot_next.setBackgroundTintList(requireContext().getResources().getColorStateList(R.color.teal_700));
                 }
             }
         });
@@ -129,8 +142,10 @@ public class PlotFragment extends Fragment {
                             .navigate(R.id.sampleFragment, null, navBuilder.build());
                 }
 
-                plot_next.setEnabled(true);
-                plot_next.setBackgroundTintList(requireContext().getResources().getColorStateList(R.color.teal_700));
+                if(first_sample_index!=-1 && second_sample_index!=-1 && third_sample_index!=-1) {
+                    plot_next.setEnabled(true);
+                    plot_next.setBackgroundTintList(requireContext().getResources().getColorStateList(R.color.teal_700));
+                }
             }
         });
 

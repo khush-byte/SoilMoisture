@@ -25,7 +25,7 @@
             android:layout_marginTop="3dp"
             android:fontFamily="sans-serif-medium"
             android:gravity="center"
-            android:text="Отбор проб почвы\nПроект WWCS Каритас Швейцария"
+            android:text="Сбор образцов почвы\nПроект WWCS Каритас Швейцария"
             android:textColor="@color/white"
             android:textSize="17sp"
             app:layout_constraintEnd_toEndOf="parent"

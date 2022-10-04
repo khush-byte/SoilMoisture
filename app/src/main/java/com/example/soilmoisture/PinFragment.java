@@ -167,7 +167,7 @@ public class PinFragment extends Fragment implements View.OnTouchListener{
     }
 
     private void enterPin(String num){
-        pin_text.setTextSize(64);
+        pin_text.setTextSize(56);
         pin = pin.replace("-","");
         pin_text.setTextColor(Color.parseColor("#626363"));
         if(pin.length()==0){

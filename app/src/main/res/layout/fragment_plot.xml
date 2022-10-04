@@ -11,15 +11,29 @@
         android:layout_height="match_parent"
         android:background="@color/white">
 
+        <View
+            android:id="@+id/divider2"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginStart="31dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="31dp"
+            android:background="#9900897B"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/info_text" />
+
         <TextView
             android:id="@+id/info_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
-            android:fontFamily="sans-serif-light"
+            android:fontFamily="sans-serif-thin"
             android:text="УЧАСТОК №1"
             android:textColor="#00897B"
-            android:textSize="22sp"
+            android:textSize="20sp"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -33,7 +47,7 @@
             android:fontFamily="sans-serif-light"
             android:text="ШАГ ЧЕТВЁРТЫЙ"
             android:textColor="#00897B"
-            android:textSize="22sp"
+            android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/info_text"
@@ -41,10 +55,6 @@
 
         <TextView
             android:id="@+id/info_text3"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/info_text4"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
@@ -54,7 +64,11 @@
             android:gravity="center"
             android:text="Пожалуйста отметьте места с которых взята проба грунта"
             android:textColor="#00897B"
-            android:textSize="22sp"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/info_text4"
             tools:ignore="HardcodedText" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -73,10 +87,11 @@
                 android:id="@+id/info_text9"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
                 android:fontFamily="sans-serif-light"
                 android:text="В ЯМЕ"
                 android:textColor="#00897B"
-                android:textSize="20sp"
+                android:textSize="19sp"
                 app:layout_constraintBottom_toTopOf="@+id/plot_tr1"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
@@ -110,7 +125,7 @@
                     android:gravity="center"
                     android:text="ДА"
                     android:textColor="#3E3C3C"
-                    android:textSize="16sp"
+                    android:textSize="15sp"
                     tools:ignore="TouchTargetSizeCheck" />
 
                 <RadioButton
@@ -126,7 +141,7 @@
                     android:gravity="center"
                     android:text="НЕТ"
                     android:textColor="#3E3C3C"
-                    android:textSize="16sp"
+                    android:textSize="15sp"
                     tools:ignore="TouchTargetSizeCheck" />
             </RadioGroup>
 
@@ -134,10 +149,11 @@
                 android:id="@+id/info_text8"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
                 android:fontFamily="sans-serif-light"
                 android:text="СВЕРХУ ОТ ЯМЫ"
                 android:textColor="#00897B"
-                android:textSize="20sp"
+                android:textSize="19sp"
                 app:layout_constraintBottom_toTopOf="@+id/plot_tr2"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
@@ -171,7 +187,7 @@
                     android:gravity="center"
                     android:text="ДА"
                     android:textColor="#3E3C3C"
-                    android:textSize="16sp"
+                    android:textSize="15sp"
                     tools:ignore="TouchTargetSizeCheck" />
 
                 <RadioButton
@@ -187,7 +203,7 @@
                     android:gravity="center"
                     android:text="НЕТ"
                     android:textColor="#3E3C3C"
-                    android:textSize="16sp"
+                    android:textSize="15sp"
                     tools:ignore="TouchTargetSizeCheck" />
             </RadioGroup>
 
@@ -195,10 +211,11 @@
                 android:id="@+id/info_text7"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
                 android:fontFamily="sans-serif-light"
                 android:text="ПРОМЕЖУТОК"
                 android:textColor="#00897B"
-                android:textSize="20sp"
+                android:textSize="19sp"
                 app:layout_constraintBottom_toTopOf="@+id/plot_tr3"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
@@ -232,7 +249,7 @@
                     android:gravity="center"
                     android:text="ДА"
                     android:textColor="#3E3C3C"
-                    android:textSize="16sp"
+                    android:textSize="15sp"
                     tools:ignore="TouchTargetSizeCheck" />
 
                 <RadioButton
@@ -248,7 +265,7 @@
                     android:gravity="center"
                     android:text="НЕТ"
                     android:textColor="#3E3C3C"
-                    android:textSize="16sp"
+                    android:textSize="15sp"
                     tools:ignore="TouchTargetSizeCheck" />
             </RadioGroup>
 
@@ -270,11 +287,11 @@
             android:backgroundTint="@color/teal_700"
             android:elevation="4dp"
             android:gravity="center"
-            android:paddingLeft="36dp"
-            android:paddingRight="36dp"
+            android:paddingLeft="40dp"
+            android:paddingRight="40dp"
             android:text="ПРОДОЛЖИТЬ"
             android:textColor="@color/white"
-            android:textSize="20sp"
+            android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/guideline3"

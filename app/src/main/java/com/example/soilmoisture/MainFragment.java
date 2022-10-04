@@ -99,6 +99,11 @@ public class MainFragment extends Fragment {
                     NavHostFragment.findNavController(MainFragment.this)
                             .navigate(R.id.plotInfoFragment, null, navBuilder.build());
                 }
+
+                if(first_plot_index!=-1 && second_plot_index!=-1 && third_plot_index!=-1) {
+                    submit.setEnabled(true);
+                    submit.setBackgroundTintList(requireContext().getResources().getColorStateList(R.color.teal_700));
+                }
             }
         });
 
@@ -112,6 +117,11 @@ public class MainFragment extends Fragment {
                     NavOptions.Builder navBuilder =  new NavOptions.Builder();
                     NavHostFragment.findNavController(MainFragment.this)
                             .navigate(R.id.plotInfoFragment, null, navBuilder.build());
+                }
+
+                if(first_plot_index!=-1 && second_plot_index!=-1 && third_plot_index!=-1) {
+                    submit.setEnabled(true);
+                    submit.setBackgroundTintList(requireContext().getResources().getColorStateList(R.color.teal_700));
                 }
             }
         });
@@ -128,8 +138,10 @@ public class MainFragment extends Fragment {
                             .navigate(R.id.plotInfoFragment, null, navBuilder.build());
                 }
 
-                submit.setEnabled(true);
-                submit.setBackgroundTintList(requireContext().getResources().getColorStateList(R.color.teal_700));
+                if(first_plot_index!=-1 && second_plot_index!=-1 && third_plot_index!=-1) {
+                    submit.setEnabled(true);
+                    submit.setBackgroundTintList(requireContext().getResources().getColorStateList(R.color.teal_700));
+                }
             }
         });
 

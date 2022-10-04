@@ -1,8 +1,12 @@
 package com.example.soilmoisture;
 
 import static com.example.soilmoisture.MainActivity.first_depth_index;
+import static com.example.soilmoisture.MainActivity.first_sample_index;
 import static com.example.soilmoisture.MainActivity.second_depth_index;
+import static com.example.soilmoisture.MainActivity.second_sample_index;
 import static com.example.soilmoisture.MainActivity.third_depth_index;
+import static com.example.soilmoisture.MainActivity.third_sample_index;
+
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
@@ -93,6 +97,10 @@ public class SampleFragment extends Fragment {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 first_depth_index = sample_tr1.indexOfChild(view.findViewById(sample_tr1.getCheckedRadioButtonId()));
+                if(first_depth_index!=-1 && second_depth_index!=-1 && third_depth_index!=-1) {
+                    sample_next.setEnabled(true);
+                    sample_next.setBackgroundTintList(requireContext().getResources().getColorStateList(R.color.teal_700));
+                }
             }
         });
 
@@ -101,6 +109,10 @@ public class SampleFragment extends Fragment {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 second_depth_index = sample_tr2.indexOfChild(view.findViewById(sample_tr2.getCheckedRadioButtonId()));
+                if(first_depth_index!=-1 && second_depth_index!=-1 && third_depth_index!=-1) {
+                    sample_next.setEnabled(true);
+                    sample_next.setBackgroundTintList(requireContext().getResources().getColorStateList(R.color.teal_700));
+                }
             }
         });
 
@@ -110,8 +122,10 @@ public class SampleFragment extends Fragment {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 third_depth_index = sample_tr3.indexOfChild(view.findViewById(sample_tr3.getCheckedRadioButtonId()));
-                sample_next.setEnabled(true);
-                sample_next.setBackgroundTintList(requireContext().getResources().getColorStateList(R.color.teal_700));
+                if(first_depth_index!=-1 && second_depth_index!=-1 && third_depth_index!=-1) {
+                    sample_next.setEnabled(true);
+                    sample_next.setBackgroundTintList(requireContext().getResources().getColorStateList(R.color.teal_700));
+                }
             }
         });
 
