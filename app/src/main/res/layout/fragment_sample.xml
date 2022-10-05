@@ -62,7 +62,7 @@
             android:layout_marginEnd="32dp"
             android:fontFamily="sans-serif-light"
             android:gravity="center"
-            android:text="Пожалуйста отметьте глубины с которых взята проба грунта"
+            android:text="Пожалуйста отметьте глубину с которых взята проба грунта"
             android:textColor="#00897B"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"

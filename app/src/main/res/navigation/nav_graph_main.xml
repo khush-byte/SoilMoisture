@@ -34,4 +34,9 @@
         android:name="com.example.soilmoisture.SampleFragment"
         android:label="fragment_sample"
         tools:layout="@layout/fragment_sample" />
+    <fragment
+        android:id="@+id/reportFragment"
+        android:name="com.example.soilmoisture.ReportFragment"
+        android:label="fragment_report"
+        tools:layout="@layout/fragment_report" />
 </navigation>

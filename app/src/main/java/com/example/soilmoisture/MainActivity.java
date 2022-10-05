@@ -95,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
     public static int second_depth_plot3_sample3_index = -1;
     public static int third_depth_plot3_sample3_index = -1;
     //------
-    private String week_number = "1";
+    public String week_number = "1";
     public static int main_yes_number = 0;
     public static int plot_yes_number = 0;
     public static int plot1_yes_number = 0;
@@ -167,7 +167,7 @@ public class MainActivity extends AppCompatActivity {
         data_field.setText(day + ", " + date);
     }
 
-    /*public void getRecommendation() {
+    /*public void getUpdate() {
         String currentDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(new Date());
         String sign = MD5(currentDate + "bCctS9eqoYaZl21a");
         rec_data.clear();
@@ -226,7 +226,7 @@ public class MainActivity extends AppCompatActivity {
         thread.start();
     }*/
 
-    /*public void setUpdate() {
+    /*public void setData() {
         String currentDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(new Date());
         String sign = MD5(currentDate + "bCctS9eqoYaZl21a");
         rec_data.clear();

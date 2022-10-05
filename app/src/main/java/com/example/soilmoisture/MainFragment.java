@@ -32,6 +32,7 @@ public class MainFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    NavOptions.Builder navBuilder =  new NavOptions.Builder();
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -145,6 +146,14 @@ public class MainFragment extends Fragment {
         openPage(main_yes2, 2);
         openPage(main_yes3, 3);
 
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                NavHostFragment.findNavController(MainFragment.this)
+                        .navigate(R.id.reportFragment, null, navBuilder.build());
+            }
+        });
+
         return view;
     }
 
@@ -152,7 +161,6 @@ public class MainFragment extends Fragment {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                NavOptions.Builder navBuilder =  new NavOptions.Builder();
                 NavHostFragment.findNavController(MainFragment.this)
                         .navigate(R.id.plotInfoFragment, null, navBuilder.build());
                 main_yes_number = number;
