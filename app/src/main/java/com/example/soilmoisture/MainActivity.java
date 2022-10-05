@@ -1,24 +1,44 @@
 package com.example.soilmoisture;
 
+import static android.Manifest.permission.READ_PHONE_NUMBERS;
+import static android.Manifest.permission.READ_PHONE_STATE;
+import static android.Manifest.permission.READ_SMS;
+
+import android.accounts.Account;
+import android.accounts.AccountManager;
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
+import android.content.pm.PackageManager;
+import android.nfc.Tag;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.telephony.TelephonyManager;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentManager;
 import androidx.navigation.NavController;
+import androidx.navigation.NavOptions;
 import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.soilmoisture.tools.NetworkManager;
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.security.ProviderInstaller;
+import com.google.android.material.tabs.TabLayout;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -104,6 +124,10 @@ public class MainActivity extends AppCompatActivity {
 
     public static String date;
     private SharedPreferences.Editor editor;
+    String qr_code = "";
+    public static String phone_number = "";
+
+    @RequiresApi(api = Build.VERSION_CODES.M)
 
     @SuppressLint({"SourceLockedOrientationActivity", "SetTextI18n"})
     @Override
@@ -150,6 +174,11 @@ public class MainActivity extends AppCompatActivity {
         getJson();
 
         editor = activity.getApplicationContext().getSharedPreferences("root_data", 0).edit();
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("root_data", 0);
+        qr_code = pref.getString("login", "");
+        if (!pref.getString("week_number", "").equals("")) {
+            week_number = pref.getString("week_number", "");
+        }
         editor.putString("week_number", week_number);
         editor.apply();
     }
@@ -166,198 +195,6 @@ public class MainActivity extends AppCompatActivity {
         day = day.substring(0, 1).toUpperCase() + day.substring(1);
         data_field.setText(day + ", " + date);
     }
-
-    /*public void getUpdate() {
-        String currentDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(new Date());
-        String sign = MD5(currentDate + "bCctS9eqoYaZl21a");
-        rec_data.clear();
-        //Log.i("JSON", "Got recomendation");
-
-        Thread thread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    URL url = new URL("https://wwcs.tj/meteo/irrigation/schedule.php");
-                    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-                    conn.setRequestMethod("POST");
-                    conn.setRequestProperty("Content-Type", "application/json;charset=UTF-8");
-                    conn.setRequestProperty("Accept", "application/json");
-                    conn.setDoOutput(true);
-                    conn.setDoInput(true);
-
-                    JSONObject jsonParam = new JSONObject();
-                    jsonParam.put("sign", sign);
-                    jsonParam.put("datetime", currentDate);
-                    jsonParam.put("select_date", select_date);
-
-                    //Log.i("JSON", jsonParam.toString());
-                    DataOutputStream os = new DataOutputStream(conn.getOutputStream());
-                    os.writeBytes(jsonParam.toString());
-
-                    os.flush();
-                    os.close();
-
-                    //Log.i("STATUS", String.valueOf(conn.getResponseCode()));
-
-                    BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-                    StringBuilder sb = new StringBuilder();
-                    String line;
-                    while ((line = br.readLine()) != null) {
-                        sb.append(line).append("\n");
-                    }
-                    br.close();
-                    conn.disconnect();
-                    String response = sb.toString();
-
-                    //Log.i("MSG", response);
-                    String a = response.substring(0,1);
-
-                    if(!a.equals("0")) {
-                        //Log.i("MSG2", "Good");
-                        SharedPreferences.Editor editor = activity.getApplicationContext().getSharedPreferences("root_data", 0).edit();
-                        editor.putString("response", response);
-                        editor.apply();
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-        thread.start();
-    }*/
-
-    /*public void setData() {
-        String currentDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(new Date());
-        String sign = MD5(currentDate + "bCctS9eqoYaZl21a");
-        rec_data.clear();
-        //Log.i("JSON", "Got recomendation");
-
-        Thread thread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    URL url = new URL("https://wwcs.tj/meteo/irrigation/schedule.php");
-                    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-                    conn.setRequestMethod("POST");
-                    conn.setRequestProperty("Content-Type", "application/json;charset=UTF-8");
-                    conn.setRequestProperty("Accept", "application/json");
-                    conn.setDoOutput(true);
-                    conn.setDoInput(true);
-
-                    JSONObject jsonParam = new JSONObject();
-                    jsonParam.put("sign", sign);
-                    jsonParam.put("datetime", currentDate);
-                    jsonParam.put("select_date", select_date);
-
-                    //Log.i("JSON", jsonParam.toString());
-                    DataOutputStream os = new DataOutputStream(conn.getOutputStream());
-                    os.writeBytes(jsonParam.toString());
-
-                    os.flush();
-                    os.close();
-
-                    //Log.i("STATUS", String.valueOf(conn.getResponseCode()));
-
-                    BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-                    StringBuilder sb = new StringBuilder();
-                    String line;
-                    while ((line = br.readLine()) != null) {
-                        sb.append(line).append("\n");
-                    }
-                    br.close();
-                    conn.disconnect();
-                    String response = sb.toString();
-
-                    //Log.i("MSG", response);
-                    String a = response.substring(0,1);
-
-                    if(!a.equals("0")) {
-                        //Log.i("MSG2", "Good");
-                        SharedPreferences.Editor editor = activity.getApplicationContext().getSharedPreferences("root_data", 0).edit();
-                        editor.putString("response", response);
-                        editor.apply();
-
-                        NavController navController = Navigation.findNavController(activity, R.id.nav_host_main);
-                        navController.navigate(R.id.mainFragment);
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-        thread.start();
-    }*/
-
-    public String MD5(String md5) {
-        try {
-            java.security.MessageDigest md = java.security.MessageDigest.getInstance("MD5");
-            byte[] array = md.digest(md5.getBytes());
-            StringBuilder sb = new StringBuilder();
-            for (byte b : array) {
-                sb.append(Integer.toHexString((b & 0xFF) | 0x100).substring(1, 3));
-            }
-            return sb.toString();
-        } catch (java.security.NoSuchAlgorithmException ignored) {
-        }
-        return null;
-    }
-
-    /*public void getRecPlot2() {
-        String currentDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(new Date());
-        String sign = MD5(currentDate + "bCctS9eqoYaZl21a");
-
-        Thread thread = new Thread(new Runnable() {
-            @SuppressLint("SetTextI18n")
-            @Override
-            public void run() {
-                try {
-                    URL url = new URL("https://wwcs.tj/meteo/irrigation/tomson.php");
-                    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-                    conn.setRequestMethod("POST");
-                    conn.setRequestProperty("Content-Type", "application/json;charset=UTF-8");
-                    conn.setRequestProperty("Accept", "application/json");
-                    conn.setDoOutput(true);
-                    conn.setDoInput(true);
-
-                    JSONObject jsonParam = new JSONObject();
-                    jsonParam.put("sign", sign);
-                    jsonParam.put("datetime", currentDate);
-                    jsonParam.put("tomson", water_level);
-
-                    //Log.i("JSON", jsonParam.toString());
-                    DataOutputStream os = new DataOutputStream(conn.getOutputStream());
-                    os.writeBytes(jsonParam.toString());
-
-                    os.flush();
-                    os.close();
-
-                    //Log.i("STATUS", String.valueOf(conn.getResponseCode()));
-
-                    BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-                    StringBuilder sb = new StringBuilder();
-                    String line;
-                    while ((line = br.readLine()) != null) {
-                        sb.append(line).append("\n");
-                    }
-                    br.close();
-                    conn.disconnect();
-                    String response = sb.toString();
-
-                    String min = response.replaceAll("[^0-9]", "");
-                    //Log.i("MSG2", min + " мин.");
-                    //plot2_rec_min.setText(min + " мин.");
-                    minutes = Integer.parseInt(min);
-
-                    NavController navController = Navigation.findNavController(activity, R.id.nav_host_main);
-                    navController.navigate(R.id.fourthFragment);
-
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-        thread.start();
-    }*/
 
     @Override
     public void onBackPressed() {
@@ -380,22 +217,22 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case "fragment_plot_info":
                 navController.navigate(R.id.mainFragment);
-                if(main_yes_number == 1 && plot1_yes_number == 0) first_plot_index = -1;
-                else if(main_yes_number == 2 && plot2_yes_number == 0) second_plot_index = -1;
-                else if(main_yes_number == 3 && plot3_yes_number == 0) third_plot_index = -1;
+                if (main_yes_number == 1 && plot1_yes_number == 0) first_plot_index = -1;
+                else if (main_yes_number == 2 && plot2_yes_number == 0) second_plot_index = -1;
+                else if (main_yes_number == 3 && plot3_yes_number == 0) third_plot_index = -1;
 
-                if(first_sample_plot1_index==1 && second_sample_plot1_index==1 && third_sample_plot1_index==1){
+                if (first_sample_plot1_index == 1 && second_sample_plot1_index == 1 && third_sample_plot1_index == 1) {
                     first_plot_index = 1;
                 }
 
-                if(first_sample_plot2_index==1 && second_sample_plot2_index==1 && third_sample_plot2_index==1){
+                if (first_sample_plot2_index == 1 && second_sample_plot2_index == 1 && third_sample_plot2_index == 1) {
                     second_plot_index = 1;
                 }
 
-                if(first_sample_plot3_index==1 && second_sample_plot3_index==1 && third_sample_plot3_index==1){
+                if (first_sample_plot3_index == 1 && second_sample_plot3_index == 1 && third_sample_plot3_index == 1) {
                     third_plot_index = 1;
                 }
-                    break;
+                break;
             case "fragment_plot":
                 navController.navigate(R.id.plotInfoFragment);
                 break;
@@ -408,13 +245,17 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    protected void onStop () {
+    protected void onStop() {
         super.onStop();
+        saveData();
+    }
+
+    public void saveData() {
         editor.putString("json_data", setJson());
         editor.apply();
     }
 
-    private String setJson(){
+    private String setJson() {
         String json_st = "";
 
         try {
@@ -477,11 +318,11 @@ public class MainActivity extends AppCompatActivity {
         return json_st;
     }
 
-    private void getJson(){
+    private void getJson() {
         SharedPreferences pref = activity.getApplicationContext().getSharedPreferences("root_data", 0);
         String my_json = pref.getString("json_data", "");
 
-        if(!my_json.equals("")) {
+        if (!my_json.equals("")) {
             try {
                 JSONObject jsonObject = new JSONObject(my_json);
                 first_plot_index = jsonObject.getInt("first_plot_index");

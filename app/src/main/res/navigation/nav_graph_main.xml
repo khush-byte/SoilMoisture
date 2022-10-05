@@ -39,4 +39,14 @@
         android:name="com.example.soilmoisture.ReportFragment"
         android:label="fragment_report"
         tools:layout="@layout/fragment_report" />
+    <fragment
+        android:id="@+id/noInternetFragment"
+        android:name="com.example.soilmoisture.NoInternetFragment"
+        android:label="fragment_no_internet"
+        tools:layout="@layout/fragment_no_internet" />
+    <fragment
+        android:id="@+id/sendInfoFragment"
+        android:name="com.example.soilmoisture.SendInfoFragment"
+        android:label="fragment_send_info"
+        tools:layout="@layout/fragment_send_info" />
 </navigation>

@@ -1,10 +1,13 @@
 package com.example.soilmoisture;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavOptions;
 import androidx.navigation.fragment.NavHostFragment;
@@ -45,6 +48,20 @@ public class InfoFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_info, container, false);
         Button info_start = view.findViewById(R.id.info_start);
+        ConstraintLayout new_week_info = view.findViewById(R.id.new_week_info);
+
+        SharedPreferences pref = view.getContext().getSharedPreferences("root_data", 0);
+        String report = pref.getString("report", "");
+        String week = pref.getString("week_number", "");
+
+        if(report.equals("done")){
+            NavOptions.Builder navBuilder =  new NavOptions.Builder();
+            NavHostFragment.findNavController(InfoFragment.this)
+                    .navigate(R.id.reportFragment, null, navBuilder.build());
+        }
+
+        if(!week.equals("1")) new_week_info.setVisibility(View.VISIBLE);
+        else new_week_info.setVisibility(View.GONE);
 
         info_start.setOnClickListener(new View.OnClickListener() {
             @Override

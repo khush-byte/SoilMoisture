@@ -7,14 +7,34 @@
     android:background="@color/white"
     tools:context=".RegActivity">
 
+    <TextView
+        android:id="@+id/info_text11"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:fontFamily="sans-serif-thin"
+        android:gravity="center"
+        android:text="РЕГИСТРАЦИЯ НОВОГО ПОЛЬЗОВАТЕЛЯ"
+        android:textColor="#00897B"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/reg_box"
+        app:layout_constraintEnd_toEndOf="@+id/reg_box"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/reg_box"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed"
+        tools:ignore="HardcodedText" />
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/reg_box"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/info_text11">
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/text_field1"
@@ -39,7 +59,7 @@
                 android:drawablePadding="11dp"
                 android:hint="Введите QR код"
                 android:importantForAutofill="no"
-                android:inputType="numberPassword"
+                android:inputType="number"
                 android:maxLength="5"
                 android:paddingStart="12dp"
                 android:paddingLeft="12dp"
@@ -71,7 +91,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:background="@drawable/edit_text_bg"
-                android:digits="123456789"
+                android:digits="0123456789"
                 android:drawableStart="@drawable/ic_baseline_lock"
                 android:drawableLeft="@drawable/ic_baseline_lock"
                 android:drawablePadding="12dp"
@@ -109,7 +129,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:background="@drawable/edit_text_bg"
-                android:digits="123456789"
+                android:digits="0123456789"
                 android:drawableStart="@drawable/ic_baseline_check_box"
                 android:drawableLeft="@drawable/ic_baseline_check_box"
                 android:drawablePadding="12dp"

@@ -91,6 +91,10 @@ public class MainFragment extends Fragment {
         if(third_plot_index==0) ((RadioButton)main_tr3.getChildAt(0)).setChecked(true);
         if(third_plot_index==1) ((RadioButton)main_tr3.getChildAt(1)).setChecked(true);
 
+        SharedPreferences pref = view.getContext().getSharedPreferences("root_data", 0);
+        String week_number = pref.getString("week_number", "");
+        info_text.setText("НЕДЕЛЯ №"+week_number);
+        
         if(first_plot_index!=-1 && second_plot_index!=-1 && third_plot_index!=-1) {
             submit.setEnabled(true);
             submit.setBackgroundTintList(requireContext().getResources().getColorStateList(R.color.teal_700));
@@ -98,10 +102,6 @@ public class MainFragment extends Fragment {
             submit.setEnabled(false);
             submit.setBackgroundTintList(requireContext().getResources().getColorStateList(R.color.grey));
         }
-
-        SharedPreferences pref = view.getContext().getSharedPreferences("root_data", 0);
-        String week_number = pref.getString("week_number", "");
-        info_text.setText("НЕДЕЛЯ №"+week_number);
 
         main_tr1.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
         {
@@ -149,6 +149,14 @@ public class MainFragment extends Fragment {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                MainActivity activity = (MainActivity) getActivity();
+                assert activity != null;
+                activity.saveData();
+
+                SharedPreferences.Editor editor = activity.getApplicationContext().getSharedPreferences("root_data", 0).edit();
+                editor.putString("report", "done");
+                editor.apply();
+
                 NavHostFragment.findNavController(MainFragment.this)
                         .navigate(R.id.reportFragment, null, navBuilder.build());
             }

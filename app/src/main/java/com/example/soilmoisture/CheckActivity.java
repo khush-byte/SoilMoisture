@@ -2,35 +2,33 @@ package com.example.soilmoisture;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
-import com.example.soilmoisture.tools.NetworkManager;
 
 public class CheckActivity extends AppCompatActivity {
-    Button connect;
-    Activity activity;
-    Toast toast;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_check);
-        activity = this;
-        connect = findViewById(R.id.connect);
+        Activity activity = this;
+        Button check_btn = findViewById(R.id.check_btn);
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("root_data", 0);
+        String login = pref.getString("login", "");
 
-        connect.setOnClickListener(new View.OnClickListener() {
+        check_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (NetworkManager.isNetworkAvailable(getApplicationContext())) {
-                    Intent myIntent = new Intent(getApplicationContext(), MainActivity.class);
-                    startActivity(myIntent);
-                    activity.finish();
-                } else {
-                    Toast.makeText(getBaseContext(), "Нет соединения с интернетом!", Toast.LENGTH_SHORT).show();
+                Intent myIntent = new Intent(getApplicationContext(), MainActivity.class);
+                if(login.length()==0){
+                    startActivity(new Intent(activity, RegActivity.class));
+                }else {
+                    startActivity(new Intent(activity, MainActivity.class));
                 }
+                activity.finish();
             }
         });
     }
